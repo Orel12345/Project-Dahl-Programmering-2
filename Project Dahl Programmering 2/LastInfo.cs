@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 
 namespace Project_Dahl_Programmering_2 {
 	internal class LastInfo {
+
 	}
 }

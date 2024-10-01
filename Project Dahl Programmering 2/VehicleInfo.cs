@@ -18,9 +18,8 @@ namespace Project_Dahl_Programmering_2 {
 		}
 
 		public void SkipToCarInfo() {
-			string inputTransmission = Console.ReadLine();
-			if (inputTransmission == "El") {
-
+			if (FuelType == "Electric") {
+				
 			}
 		}
 
