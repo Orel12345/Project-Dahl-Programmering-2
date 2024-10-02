@@ -28,7 +28,9 @@ namespace Project_Dahl_Programmering_2 {
             } else if (inputBodyType == "2") {
                 MainPageFuelType();
             } else if (inputBodyType == "3") {
-
+                MainPageFuelType();
+            } else if (inputBodyType == "4") {
+                MainPageFuelType();
             }
 
         }
@@ -39,8 +41,30 @@ namespace Project_Dahl_Programmering_2 {
 			Console.WriteLine("1. Petrol");
 			Console.WriteLine("2. Diesel");
 			Console.WriteLine("3. Electric");
+            string inputFuelType = Console.ReadLine();
+            if (inputFuelType == "1") {
+                MainPageTransmission();
+            } else if (inputFuelType == "2") {
+                MainPageTransmission();
+            } else if (inputFuelType == "3") {
+
+            }
 
 
 		}
+
+        public void MainPageTransmission() {
+            Console.Clear();
+            Console.WriteLine("Which transmission would you like ?");
+            Console.WriteLine("1. Manual");
+            Console.WriteLine("2. Automatic");
+            string inputTransmission = Console.ReadLine();
+            if  (inputTransmission == "1") {
+
+            } else if (inputTransmission == "2") {
+
+            }
+
+        }
 	}
 }

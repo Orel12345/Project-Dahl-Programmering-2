@@ -17,11 +17,6 @@ namespace Project_Dahl_Programmering_2 {
 
 		}
 
-		public void SkipToCarInfo() {
-			if (FuelType == "Electric") {
-				
-			}
-		}
 
 
 
