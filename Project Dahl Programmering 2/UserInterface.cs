@@ -16,6 +16,14 @@ namespace Project_Dahl_Programmering_2 {
 
 		}
 
+        public void BookingDetails() {
+            Console.WriteLine("Please write your first and last name");
+            string inputName = Console.ReadLine();
+            while (inputName == "") {
+                Console.WriteLine( );
+            }
+        }
+
 		public void MainPageBodyType() {
             Console.WriteLine("Which of the following car bodytypes would you like?");
             Console.WriteLine("1. Sedan");
@@ -64,6 +72,23 @@ namespace Project_Dahl_Programmering_2 {
             } else if (inputTransmission == "2") {
 
             }
+
+        }
+
+        public void MainPageCarInfo() {
+            Console.Clear();
+            Console.WriteLine("How much horsepower would you like on your car");
+            Console.WriteLine("1. 250 - 400");
+            Console.WriteLine("2. 500 - 700 (sport cars only)");
+            string inputHorsePower = Console.ReadLine();
+            if (inputHorsePower == "1") {
+                Console.WriteLine();
+            }
+
+        }
+
+        public void MainPageTrailer() {
+            Console.Clear();
 
         }
 	}

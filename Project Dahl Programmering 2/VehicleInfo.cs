@@ -6,22 +6,21 @@ using System.Threading.Tasks;
 
 namespace Project_Dahl_Programmering_2 {
 	internal class VehicleInfo {
-		public string BodyType;
-		public string FuelType;
-		public string Transmission;
+		public string VehicleType;
+		public int Tyres;
+		public string FuelInfo;
 
-		public VehicleInfo(string inputBodyType, string inputFuelType, string inputTransmission) {
-			BodyType = inputBodyType;
-			FuelType = inputFuelType;
-			Transmission = inputTransmission;
-
+		public VehicleInfo(string inputVehiceInfo, string inputFuelInfo, int inputTyres) {
+			VehicleType = inputVehiceInfo;
+			Tyres = inputTyres;
+			FuelInfo = inputFuelInfo;
 		}
 
 
 
 
 		public void PrintVehicleInfo() {
-            Console.WriteLine("Your car body type: " + BodyType + " FuelType: " + " Transmission: " + Transmission);
+            Console.WriteLine("Your Vehicle type: " + VehicleType + " FuelInfo: " + FuelInfo + " Tyres: " + Tyres);
         }
 	}
 }
