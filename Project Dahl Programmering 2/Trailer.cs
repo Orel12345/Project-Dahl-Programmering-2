@@ -20,7 +20,7 @@ namespace Project_Dahl_Programmering_2 {
 
 		List<Trailer> trailerList = new List<Trailer> {
 			new Trailer("Enclosed Trailer", 1000, 5, "Braked", "trailer", "NO FUEL", 2),
-			new Trailer("Grtaing Trailer", 500, 2, "Unbraked", "trailer", "NO FUEL", 2)
+			new Trailer("Grating Trailer", 500, 2, "Unbraked", "trailer", "NO FUEL", 2)
 		};
 	}
 }

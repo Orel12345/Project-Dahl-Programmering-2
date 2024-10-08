@@ -40,10 +40,10 @@ namespace Project_Dahl_Programmering_2 {
 
 		};
 
-		public List<CarInfo> MethodOfElimination(string inputBodyType, string inputTransmission, string inputFuelType) {
+		public List<CarInfo> MethodOfElimination(string inputBodyType, string inputTransmission, string inputFuelInfo) {
 			List<CarInfo> AvailableCars = new List<CarInfo>();
 			for (int i = 0; i <= AvailableCarsList.Count; i++) {
-				if (AvailableCarsList[i].BodyType == inputBodyType && AvailableCarsList[i].Transmission == inputTransmission && AvailableCarsList[i].FuelType == inputFuelType) {
+				if (AvailableCarsList[i].BodyType == inputBodyType && AvailableCarsList[i].Transmission == inputTransmission && AvailableCarsList[i].FuelInfo == inputFuelInfo) {
 					AvailableCars.Add(AvailableCarsList[i]);
 				}
 			}

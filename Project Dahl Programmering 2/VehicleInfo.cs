@@ -19,8 +19,5 @@ namespace Project_Dahl_Programmering_2 {
 
 
 
-		public void PrintVehicleInfo() {
-            Console.WriteLine("Your Vehicle type: " + VehicleType + " FuelInfo: " + FuelInfo + " Tyres: " + Tyres);
-        }
 	}
 }

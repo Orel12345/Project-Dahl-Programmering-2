@@ -10,6 +10,8 @@ namespace Project_Dahl_Programmering_2 {
 			UserInterface userInterface = new UserInterface();
 
 			userInterface.StartPage();
+			userInterface.BookingDetails();
+			userInterface.PickUpInfo();
 		}
 	}
 }
