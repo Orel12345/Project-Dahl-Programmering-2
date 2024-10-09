@@ -3,23 +3,32 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.AccessControl;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Project_Dahl_Programmering_2 {
 	internal class UserInterface {
+        protected string InputBodyType;
+        protected string InputTransmission;
+        protected string InputFuelInfo;
+        protected DateTime Start;
+        protected DateTime End;
 
-		public void StartPage() {
+
+        public void StartPage() {
             Console.WriteLine("Welcome to Orel's Rental Cars");
             Console.WriteLine("--------------------------");
             Console.WriteLine("Press any key to continue");
 			Console.ReadKey();
 			Console.Clear();
-
+            string bookingDetails = BookingDetails();
+			string pickUpInfo = BookingDetails();
+			LastInfo(bookingDetails, pickUpInfo);
 		}
 
-        public void BookingDetails() {
+        public string BookingDetails() {
             Console.WriteLine("Please write your first and last name");
             string inputName = Console.ReadLine();
             while (inputName == "") {
@@ -72,25 +81,29 @@ namespace Project_Dahl_Programmering_2 {
 				inputAdress = Console.ReadLine();
 
 			}
+
+            string totalBookingDetails = "Your name: " + inputName + " age: " + inputAge + " email: " + inputEmail + " phone number: " + inputPhoneNumber + " adress: " + inputAdress;
+            return totalBookingDetails;
 		}
 
-        public void PickUpInfo() {
+        public string PickUpInfo() {
             Console.WriteLine("When would you like to pick up your car?");
             string startTimeInput = Console.ReadLine();
             Console.WriteLine("When would you like to leave your car?");
             string endTimeInput = Console.ReadLine();
 
-            DateTime start = DateTime.ParseExact(startTimeInput, "d MMMM", CultureInfo.InvariantCulture);
-			DateTime end = DateTime.ParseExact(endTimeInput, "d MMMM", CultureInfo.InvariantCulture);
+            DateTime Start = DateTime.ParseExact(startTimeInput, "d MMMM", CultureInfo.InvariantCulture);
+			DateTime End = DateTime.ParseExact(endTimeInput, "d MMMM", CultureInfo.InvariantCulture);
 
             Console.WriteLine("Where would you like to pick the car up. Choose between Stockholm, Malmö and Gothenburg");
 
             string LocationInput = Console.ReadLine();
 
-
+            return "Your pick up info, the renting will start on: " + Start + " it will end: " + End + " and the car will be picked up in: " + LocationInput;
 
         }
 
+       
 
 		public void MainPageBodyType() {
             Console.WriteLine("Which of the following car bodytypes would you like?");
@@ -98,12 +111,12 @@ namespace Project_Dahl_Programmering_2 {
             Console.WriteLine("2. Suv");
             Console.WriteLine("3. Kombi");
             Console.WriteLine("4. Sport");
-            string inputBodyType = Console.ReadLine();
+            InputBodyType = Console.ReadLine();
             int numChoice;
 
-            while(!int.TryParse(inputBodyType, out numChoice)) {
+            while(!int.TryParse(InputBodyType, out numChoice)) {
                 Console.WriteLine("Please write a number");
-                inputBodyType = Console.ReadLine();
+                InputBodyType = Console.ReadLine();
             }
 
             if (numChoice == 1) {
@@ -124,12 +137,12 @@ namespace Project_Dahl_Programmering_2 {
 			Console.WriteLine("1. Petrol");
 			Console.WriteLine("2. Diesel");
 			Console.WriteLine("3. Electric");
-            string inputFuelType = Console.ReadLine();
+            InputFuelInfo = Console.ReadLine();
             int numChoice;
 
-			while (!int.TryParse(inputFuelType, out numChoice)) {
+			while (!int.TryParse(InputFuelInfo, out numChoice)) {
 				Console.WriteLine("Please write a number");
-				inputFuelType = Console.ReadLine();
+				InputFuelInfo = Console.ReadLine();
 			}
 			if (numChoice == 1) {
                 MainPageTransmission();
@@ -147,11 +160,11 @@ namespace Project_Dahl_Programmering_2 {
             Console.WriteLine("Which transmission would you like ?");
             Console.WriteLine("1. Manual");
             Console.WriteLine("2. Automatic");
-            string inputTransmission = Console.ReadLine();
+            InputTransmission = Console.ReadLine();
             int numChoice;
-			while (!int.TryParse(inputTransmission, out numChoice)) {
+			while (!int.TryParse(InputTransmission, out numChoice)) {
 				Console.WriteLine("Please write a number");
-				inputTransmission = Console.ReadLine();
+				InputTransmission = Console.ReadLine();
 			}
 			if  (numChoice == 1) {
                 MainPageTrailer();
@@ -185,14 +198,33 @@ namespace Project_Dahl_Programmering_2 {
 				}
 
 			} else if (numChoice == 2) {
-
+                PossibleCars();
             }
 
-
+           
+            
 		}
 
-        public void LastInfo() {
+        public void PossibleCars() {
+            Console.WriteLine("Choose any of these cars");
+            List<CarInfo> PossibleCarChoices = CarInfo.MethodOfElimination(InputBodyType, InputTransmission, InputFuelInfo);
+            for(int i = 0; i < PossibleCarChoices.Count; i++) {
+                Console.WriteLine(PossibleCarChoices[i].BodyType + PossibleCarChoices[i].Transmission + PossibleCarChoices[i].FuelInfo);
+            }
 
+            Console.WriteLine("Please write exactly what car you want");
+            Console.ReadLine();
+
+        }
+
+        
+
+        public void LastInfo(string bookingDetails, string pickUpInfo) {
+            Console.WriteLine("A summary of your order");
+            Console.WriteLine("Booking details " + bookingDetails + " Pick Up info " + pickUpInfo);
+            Console.WriteLine("Car details " + InputBodyType + ", " + InputFuelInfo + ", " + InputTransmission);
+            LastInfo price = new LastInfo();
+            Console.WriteLine("The booking will cost " + price.PriceBasedOnCar(InputBodyType, 1000, Start, End));
         }
 	}
 }

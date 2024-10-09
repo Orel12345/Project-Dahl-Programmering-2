@@ -12,6 +12,12 @@ namespace Project_Dahl_Programmering_2 {
 			userInterface.StartPage();
 			userInterface.BookingDetails();
 			userInterface.PickUpInfo();
+			userInterface.MainPageBodyType();
+			userInterface.MainPageFuelType();
+			userInterface.MainPageTransmission();
+			userInterface.MainPageTrailer();
+			userInterface.PossibleCars();
+			
 		}
 	}
 }
