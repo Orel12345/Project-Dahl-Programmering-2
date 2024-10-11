@@ -8,10 +8,10 @@ namespace Project_Dahl_Programmering_2 {
 	internal class CarInfo : VehicleInfo {
 		public string BodyType;
 		public string Transmission;
-		protected int HorsePower;
-		protected int TowCapacity;
-		protected int Doors;
-		protected string CarModel;
+		public int HorsePower;
+		public int TowCapacity;
+		public int Doors;
+		public string CarModel;
 
 		public CarInfo(string inputCarModel, int inputHorsePower, int inputTowCapacity, int inputDoors, string inputBodyType, string inputFuelInfo, string inputTransmission, string inputVehiceInfo, int inputTyres) : base(inputVehiceInfo, inputFuelInfo, inputTyres) {
 			Transmission = inputTransmission;
@@ -44,9 +44,11 @@ namespace Project_Dahl_Programmering_2 {
 		};
 
 		public static List<CarInfo> MethodOfElimination(string inputBodyType, string inputTransmission, string inputFuelInfo) {
-			
-			List<CarInfo> AvailableCars = new List<CarInfo>();
-			for (int i = 0; i <= AvailableCarsList.Count; i++) {
+            //Console.WriteLine(inputBodyType);
+            //Console.WriteLine(inputFuelInfo);
+            //Console.WriteLine(inputTransmission);
+            List<CarInfo> AvailableCars = new List<CarInfo>();
+			for (int i = 0; i < AvailableCarsList.Count; i++) {
 				if (AvailableCarsList[i].BodyType == inputBodyType && AvailableCarsList[i].Transmission == inputTransmission && AvailableCarsList[i].FuelInfo == inputFuelInfo) {
 					AvailableCars.Add(AvailableCarsList[i]);
 				}

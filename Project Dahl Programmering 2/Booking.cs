@@ -19,5 +19,55 @@ namespace Project_Dahl_Programmering_2 {
 			_phoneNumber = inputPhoneNumber;
 			_adress = inputAdress;
 		}
+
+		public string Name {
+			get {
+				return _name;
+			}
+
+			set {
+			  _name = value;
+			}
+		}
+
+		public int Age {
+			get {
+				return _age;
+			}
+
+			set {
+				_age = value;
+			}
+		}
+
+		public string Email {
+			get {
+				return _email;
+			}
+
+			set {
+				_email = value;
+			}
+		}
+
+		public string PhoneNumber {
+			get {
+				return _phoneNumber;
+			}
+
+			set {
+				_phoneNumber = value;
+			}
+		}
+
+		public string Adress {
+			get {
+				return _adress;
+			}
+
+			set {
+				_adress = value;
+			}
+		}
 	}
 }

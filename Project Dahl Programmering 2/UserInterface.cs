@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -23,12 +24,16 @@ namespace Project_Dahl_Programmering_2 {
             Console.WriteLine("Press any key to continue");
 			Console.ReadKey();
 			Console.Clear();
-            string bookingDetails = BookingDetails();
-			string pickUpInfo = BookingDetails();
-			LastInfo(bookingDetails, pickUpInfo);
+            Booking bookingInfo = BookingDetails();
+            PickUpInfo();
+            MainPageBodyType();
+            MainPageFuelType();
+            MainPageTransmission();
+            MainPageTrailer();
+            PossibleCars();
 		}
 
-        public string BookingDetails() {
+        public Booking BookingDetails() {
             Console.WriteLine("Please write your first and last name");
             string inputName = Console.ReadLine();
             while (inputName == "") {
@@ -82,18 +87,18 @@ namespace Project_Dahl_Programmering_2 {
 
 			}
 
-            string totalBookingDetails = "Your name: " + inputName + " age: " + inputAge + " email: " + inputEmail + " phone number: " + inputPhoneNumber + " adress: " + inputAdress;
-            return totalBookingDetails;
+            Booking bookingInfo = new Booking(inputName, age, inputEmail, inputPhoneNumber, inputAdress);
+            return bookingInfo;
 		}
 
         public string PickUpInfo() {
-            Console.WriteLine("When would you like to pick up your car?");
+            Console.WriteLine("When would you like to pick up your car? DD/MM");
             string startTimeInput = Console.ReadLine();
-            Console.WriteLine("When would you like to leave your car?");
+            Console.WriteLine("When would you like to leave your car? DD/MM");
             string endTimeInput = Console.ReadLine();
 
-            DateTime Start = DateTime.ParseExact(startTimeInput, "d MMMM", CultureInfo.InvariantCulture);
-			DateTime End = DateTime.ParseExact(endTimeInput, "d MMMM", CultureInfo.InvariantCulture);
+            Start = DateTime.ParseExact(startTimeInput, "d MMMM", CultureInfo.InvariantCulture);
+			End = DateTime.ParseExact(endTimeInput, "d MMMM", CultureInfo.InvariantCulture);
 
             Console.WriteLine("Where would you like to pick the car up. Choose between Stockholm, Malmö and Gothenburg");
 
@@ -120,12 +125,16 @@ namespace Project_Dahl_Programmering_2 {
             }
 
             if (numChoice == 1) {
+                InputBodyType = "Sedan";
                 MainPageFuelType();
             } else if (numChoice == 2) {
+                InputBodyType = "Suv";
                 MainPageFuelType();
             } else if (numChoice == 3) {
+                InputBodyType = "Kombi";
                 MainPageFuelType();
             } else if (numChoice == 4) {
+                InputBodyType = "Sport";
                 MainPageFuelType();
             }
 
@@ -145,10 +154,13 @@ namespace Project_Dahl_Programmering_2 {
 				InputFuelInfo = Console.ReadLine();
 			}
 			if (numChoice == 1) {
+                InputFuelInfo = "Petrol";
                 MainPageTransmission();
             } else if (numChoice == 2) {
+                InputFuelInfo = "Diesel";
                 MainPageTransmission();
             } else if (numChoice == 3) {
+                InputFuelInfo = "Electric";
                 MainPageTrailer();
             }
 
@@ -167,8 +179,10 @@ namespace Project_Dahl_Programmering_2 {
 				InputTransmission = Console.ReadLine();
 			}
 			if  (numChoice == 1) {
+                InputTransmission = "Manual";
                 MainPageTrailer();
             } else if (numChoice == 2) {
+                InputTransmission = "Automatic";
                 MainPageTrailer();
             }
 
@@ -197,6 +211,18 @@ namespace Project_Dahl_Programmering_2 {
 					inputTrailerType = Console.ReadLine();
 				}
 
+               if (numChoiceTrailer == 1) {
+                    inputTrailerType = "Enclosed Trailer";
+					PossibleCars();
+
+			   } else if (numChoiceTrailer == 2) {
+                    inputTrailerType = "Grating Trailer";
+                    PossibleCars();
+               }
+
+                
+
+
 			} else if (numChoice == 2) {
                 PossibleCars();
             }
@@ -206,25 +232,27 @@ namespace Project_Dahl_Programmering_2 {
 		}
 
         public void PossibleCars() {
-            Console.WriteLine("Choose any of these cars");
+            Console.WriteLine("Your chosen car");
+
             List<CarInfo> PossibleCarChoices = CarInfo.MethodOfElimination(InputBodyType, InputTransmission, InputFuelInfo);
             for(int i = 0; i < PossibleCarChoices.Count; i++) {
                 Console.WriteLine(PossibleCarChoices[i].BodyType + PossibleCarChoices[i].Transmission + PossibleCarChoices[i].FuelInfo);
             }
 
-            Console.WriteLine("Please write exactly what car you want");
-            Console.ReadLine();
+			Console.WriteLine("Press any key to continue");
+			Console.ReadKey();
 
-        }
+		}
+
+        public void LastInfo() {
+			LastInfo lastInfo = new LastInfo();
+			lastInfo.Summary();
+            lastInfo.PriceBasedOnCar(InputBodyType, 1000, Start, End);
+		}
+        
 
         
 
-        public void LastInfo(string bookingDetails, string pickUpInfo) {
-            Console.WriteLine("A summary of your order");
-            Console.WriteLine("Booking details " + bookingDetails + " Pick Up info " + pickUpInfo);
-            Console.WriteLine("Car details " + InputBodyType + ", " + InputFuelInfo + ", " + InputTransmission);
-            LastInfo price = new LastInfo();
-            Console.WriteLine("The booking will cost " + price.PriceBasedOnCar(InputBodyType, 1000, Start, End));
-        }
+        
 	}
 }
