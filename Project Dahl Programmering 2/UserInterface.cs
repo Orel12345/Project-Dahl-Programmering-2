@@ -37,6 +37,10 @@ namespace Project_Dahl_Programmering_2 {
         PickUp PickUp;
 
 
+        /// <summary>
+        /// Metod som är start skärmen.
+        /// Alla andra metoder anropas här i den ordningen gränssnittet ska vara
+        /// </summary>
 
 		public void StartPage() {
             Console.WriteLine("Welcome to Orel's Rental Cars");
@@ -50,8 +54,13 @@ namespace Project_Dahl_Programmering_2 {
             Car = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
 			TrailerInfo = MainPageTrailer();
             PossibleCars();
-            LastInfo();
+            
 		}
+
+        /// <summary>
+        /// Metod som ber användaren att skriva information om sig själv
+        /// </summary>
+        /// <returns>returnerar användarens input</returns>
 
         public Booking BookingDetails() {
             Console.WriteLine("Please write your first and last name");
@@ -70,12 +79,14 @@ namespace Project_Dahl_Programmering_2 {
 			while (!int.TryParse(inputAge, out age)) {
 				Console.WriteLine("Invalid input, please try again");
 				inputAge = Console.ReadLine();
-				
+                
+
 			}
 
-            if (age < 18) {
+			if (age < 18) {
                 Environment.Exit(1);
-            }
+			}
+
 
 			Console.Clear();
 
@@ -113,6 +124,11 @@ namespace Project_Dahl_Programmering_2 {
             return BookingInfo;
 		}
 
+        /// <summary>
+        /// Metoden ber användaren att skriva när och vart man ska hämta bilen samt vart man ska lämna den
+        /// </summary>
+        /// <returns>returnar användarens input</returns>
+
         public PickUp PickUpInfo() {
             Console.WriteLine("When would you like to pick up your car? DD/MM");
             string startTimeInput = Console.ReadLine();
@@ -132,7 +148,11 @@ namespace Project_Dahl_Programmering_2 {
 
         }
 
-       
+		/// <summary>
+		/// Metod som ber användaren att skriva vilken karosstyp man vill ha
+		/// </summary>
+		/// <returns>användarens input</returns>
+
 
 		public CarInfo MainPageBodyType() {
             Console.Clear();
@@ -150,16 +170,16 @@ namespace Project_Dahl_Programmering_2 {
             }
 
             if (numChoice == 1) {
-                InputBodyType = "Sedan ";
+                InputBodyType = "Sedan";
                 MainPageFuelType();
             } else if (numChoice == 2) {
-                InputBodyType = "Suv ";
+                InputBodyType = "Suv";
                 MainPageFuelType();
             } else if (numChoice == 3) {
-                InputBodyType = "Kombi ";
+                InputBodyType = "Kombi";
                 MainPageFuelType();
             } else if (numChoice == 4) {
-                InputBodyType = "Sport ";
+                InputBodyType = "Sport";
                 MainPageFuelType();
             }
 
@@ -167,7 +187,12 @@ namespace Project_Dahl_Programmering_2 {
             return carInfo;
         }
 
-        public CarInfo MainPageFuelType() {
+		/// <summary>
+		/// Metod som ber användaren att skriva vilket bränsle man vill ha
+		/// </summary>
+		/// <returns>användarens input</returns>
+
+		public CarInfo MainPageFuelType() {
 			Console.Clear();
 			Console.WriteLine("Which fueltype would you like on your car?");
 			Console.WriteLine("1. Petrol");
@@ -181,21 +206,26 @@ namespace Project_Dahl_Programmering_2 {
 				InputFuelInfo = Console.ReadLine();
 			}
 			if (numChoice == 1) {
-                InputFuelInfo = " Petrol ";
+                InputFuelInfo = "Petrol";
                 MainPageTransmission();
             } else if (numChoice == 2) {
-                InputFuelInfo = " Diesel ";
+                InputFuelInfo = "Diesel";
                 MainPageTransmission();
             } else if (numChoice == 3) {
-                InputFuelInfo = " Electric ";
-                MainPageTrailer();
+                InputFuelInfo = "Electric";
+                
             }
 
 			CarInfo carInfo = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
 			return carInfo;
 		}
 
-        public CarInfo MainPageTransmission() {
+		/// <summary>
+		/// Metod som ber användaren att skriva vilken växeltyp man vill
+		/// </summary>
+		/// <returns>användarens input</returns>
+
+		public CarInfo MainPageTransmission() {
             Console.Clear();
             Console.WriteLine("Which transmission would you like ?");
             Console.WriteLine("1. Manual");
@@ -207,18 +237,23 @@ namespace Project_Dahl_Programmering_2 {
 				InputTransmission = Console.ReadLine();
 			}
 			if  (numChoice == 1) {
-                InputTransmission = " Manual";
-                MainPageTrailer();
+                InputTransmission = "Manual";
+                
             } else if (numChoice == 2) {
-                InputTransmission = " Automatic";
-                MainPageTrailer();
+                InputTransmission = "Automatic";
+                
             }
 
 			CarInfo carInfo = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
 			return carInfo;
 		}
 
-        public Trailer MainPageTrailer() {
+		/// <summary>
+		/// Metod som ber användaren att skriva om man vill ha ett släp
+		/// </summary>
+		/// <returns>null</returns>
+
+		public Trailer MainPageTrailer() {
             Console.Clear();
             Console.WriteLine("Would you like a trailer?");
             Console.WriteLine("1. Yes");
@@ -242,52 +277,63 @@ namespace Project_Dahl_Programmering_2 {
 				} 
 
                if (numChoiceTrailer == 1) {
-                    InputTrailerType = "Enclosed Trailer";
-					PossibleCars();
+                    return Trailer.trailerList[0];
+					
 
 			   } else if (numChoiceTrailer == 2) {
-                    InputTrailerType = "Grating Trailer";
-                    PossibleCars();
-               }
+					return Trailer.trailerList[1];
+
+				}
 
 
 			} else if (numChoice == 2) {
-                PossibleCars();
+                
             }
-
-            Trailer trailerChoice = new Trailer(InputTrailerType,MaxWeight,Volume,Braked, VehicleType, FuelInfo, Tyres);
-            return trailerChoice;
-            
+            return null;
 		}
 
-        public void PossibleCars() {
+		/// <summary>
+		/// Metod som skriver ut den bilen man har valt
+		/// </summary>
+
+		public void PossibleCars() {
             Console.WriteLine("Your chosen car: ");
 
             List<CarInfo> PossibleCarChoices = CarInfo.MethodOfElimination(InputBodyType, InputTransmission, InputFuelInfo);
             for(int i = 0; i < PossibleCarChoices.Count; i++) {
                 Console.WriteLine(PossibleCarChoices[i].CarModel);
+                
             }
 
-            if (Car == PossibleCarChoices[0]) {
-
+            if (PossibleCarChoices.Count == 0) {
+                Console.WriteLine("No cars matched your preferences.");
+                Environment.Exit(1);
+            } else {
+                Car = PossibleCarChoices[0];
             }
-                
-                
+
+            Console.Clear();
+            LastInfo();    
 
             Console.ReadLine();
             
 		}
 
+        /// <summary>
+        /// Metod som sammanfattar hyrningen.
+        /// </summary>
+
         public void LastInfo() {
-			LastInfo lastInfo = new LastInfo();
-			lastInfo.Summary(BookingInfo, PickUp, Car, TrailerInfo);
-            Console.WriteLine("The price will be: " + lastInfo.PriceBasedOnCar(InputBodyType, 1000, Start, End) + "kr");
-            
-		}
-        
+            LastInfo lastInfo = new LastInfo();
+            lastInfo.Summary(BookingInfo, PickUp, Car, TrailerInfo);
+			Console.WriteLine("-----------------");
+			Console.WriteLine("The price will be: " + lastInfo.PriceBasedOnCar(InputBodyType, 1000, Start, End) + "kr");
 
-        
+        }
 
-        
-	}
+
+
+
+
+    }
 }

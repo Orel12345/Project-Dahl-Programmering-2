@@ -13,6 +13,19 @@ namespace Project_Dahl_Programmering_2 {
 		public int Doors;
 		public string CarModel;
 
+		/// <summary>
+		/// Konstruktor som tar emot värden från fälten bodytype, transmission, horse power, tow capacity, doors, car model
+		/// </summary>
+		/// <param name="inputCarModel">Tar emot info om car model</param>
+		/// <param name="inputHorsePower">Tar emot info om horse power</param>
+		/// <param name="inputTowCapacity">Tar emot info om tow capacity</param>
+		/// <param name="inputDoors">Tar emot info om antalet dörrar</param>
+		/// <param name="inputBodyType">Tar emot info om karrosen</param>
+		/// <param name="inputFuelInfo">Tar emot info om bränslet</param>
+		/// <param name="inputTransmission">Tar emot info om växel låda</param>
+		/// <param name="inputVehiceInfo">Tar emot info om vehicle</param>
+		/// <param name="inputTyres">Tar emot info om antal däck</param>
+
 		public CarInfo(string inputCarModel, int inputHorsePower, int inputTowCapacity, int inputDoors, string inputBodyType, string inputFuelInfo, string inputTransmission, string inputVehiceInfo, int inputTyres) : base(inputVehiceInfo, inputFuelInfo, inputTyres) {
 			Transmission = inputTransmission;
 			BodyType = inputBodyType;
@@ -51,13 +64,21 @@ namespace Project_Dahl_Programmering_2 {
 
 		};
 
+		/// <summary>
+		/// Metod som utesluter allt som användaren inte har valt för att till slut ha en bil kvar.
+		/// </summary>
+		/// <param name="inputBodyType">Vilken karosstyp användaren valde</param>
+		/// <param name="inputTransmission">Växellådan användaren valde</param>
+		/// <param name="inputFuelInfo">Vilket bränsle användaren valde</param>
+		/// <returns>Den bilen som finns kvar</returns>
+
 		public static List<CarInfo> MethodOfElimination(string inputBodyType, string inputTransmission, string inputFuelInfo) {
 			Console.WriteLine(inputBodyType);
 			Console.WriteLine(inputFuelInfo);
 			Console.WriteLine(inputTransmission);
 			List<CarInfo> AvailableCars = new List<CarInfo>();
 			for (int i = 0; i < AvailableCarsList.Count; i++) {
-				if (AvailableCarsList[i].BodyType == inputBodyType && AvailableCarsList[i].Transmission == inputTransmission && AvailableCarsList[i].FuelInfo == inputFuelInfo) {
+				if (AvailableCarsList[i].BodyType == inputBodyType && AvailableCarsList[i].FuelInfo == inputFuelInfo || AvailableCarsList[i].Transmission == inputTransmission) {
 					AvailableCars.Add(AvailableCarsList[i]);
                     
                 }
