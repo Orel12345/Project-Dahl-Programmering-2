@@ -10,6 +10,13 @@ namespace Project_Dahl_Programmering_2 {
 		public int Tyres;
 		public string FuelInfo;
 
+		/// <summary>
+		/// En konstruktor som tar emot värden på vehicletype, tyres och info
+		/// </summary>
+		/// <param name="inputVehiceInfo"></param>
+		/// <param name="inputFuelInfo"></param>
+		/// <param name="inputTyres"></param>
+
 		public VehicleInfo(string inputVehiceInfo, string inputFuelInfo, int inputTyres) {
 			VehicleType = inputVehiceInfo;
 			Tyres = inputTyres;

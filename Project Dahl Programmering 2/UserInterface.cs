@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Dynamic;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,26 +12,45 @@ using System.Threading.Tasks;
 
 namespace Project_Dahl_Programmering_2 {
 	internal class UserInterface {
-        protected string InputBodyType;
+		protected string VehicleType;
+		protected int Tyres;
+		protected string FuelInfo;
+
+		protected string InputBodyType;
         protected string InputTransmission;
         protected string InputFuelInfo;
-        protected DateTime Start;
+		protected int HorsePower;
+		protected int TowCapacity;
+		protected int Doors;
+		protected string CarModel;
+
+		protected string InputTrailerType;
+		protected int MaxWeight;
+		protected int Volume;
+		protected string Braked;
+
+		protected DateTime Start;
         protected DateTime End;
+        CarInfo Car;
+        Trailer TrailerInfo;
+        Booking BookingInfo;
+        PickUp PickUp;
 
 
-        public void StartPage() {
+
+		public void StartPage() {
             Console.WriteLine("Welcome to Orel's Rental Cars");
             Console.WriteLine("--------------------------");
             Console.WriteLine("Press any key to continue");
 			Console.ReadKey();
 			Console.Clear();
-            Booking bookingInfo = BookingDetails();
-            PickUpInfo();
+            BookingInfo = BookingDetails();
+            PickUp = PickUpInfo();
             MainPageBodyType();
-            MainPageFuelType();
-            MainPageTransmission();
-            MainPageTrailer();
+            Car = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
+			TrailerInfo = MainPageTrailer();
             PossibleCars();
+            LastInfo();
 		}
 
         public Booking BookingDetails() {
@@ -87,11 +107,13 @@ namespace Project_Dahl_Programmering_2 {
 
 			}
 
-            Booking bookingInfo = new Booking(inputName, age, inputEmail, inputPhoneNumber, inputAdress);
-            return bookingInfo;
+            Console.Clear();
+
+            Booking BookingInfo = new Booking(inputName, age, inputEmail, inputPhoneNumber, inputAdress);
+            return BookingInfo;
 		}
 
-        public string PickUpInfo() {
+        public PickUp PickUpInfo() {
             Console.WriteLine("When would you like to pick up your car? DD/MM");
             string startTimeInput = Console.ReadLine();
             Console.WriteLine("When would you like to leave your car? DD/MM");
@@ -104,13 +126,16 @@ namespace Project_Dahl_Programmering_2 {
 
             string LocationInput = Console.ReadLine();
 
-            return "Your pick up info, the renting will start on: " + Start + " it will end: " + End + " and the car will be picked up in: " + LocationInput;
+            PickUp PickUpInfo = new PickUp(Start, End, LocationInput);
+
+            return PickUpInfo;
 
         }
 
        
 
-		public void MainPageBodyType() {
+		public CarInfo MainPageBodyType() {
+            Console.Clear();
             Console.WriteLine("Which of the following car bodytypes would you like?");
             Console.WriteLine("1. Sedan");
             Console.WriteLine("2. Suv");
@@ -125,22 +150,24 @@ namespace Project_Dahl_Programmering_2 {
             }
 
             if (numChoice == 1) {
-                InputBodyType = "Sedan";
+                InputBodyType = "Sedan ";
                 MainPageFuelType();
             } else if (numChoice == 2) {
-                InputBodyType = "Suv";
+                InputBodyType = "Suv ";
                 MainPageFuelType();
             } else if (numChoice == 3) {
-                InputBodyType = "Kombi";
+                InputBodyType = "Kombi ";
                 MainPageFuelType();
             } else if (numChoice == 4) {
-                InputBodyType = "Sport";
+                InputBodyType = "Sport ";
                 MainPageFuelType();
             }
 
+            CarInfo carInfo = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
+            return carInfo;
         }
 
-        public void MainPageFuelType() {
+        public CarInfo MainPageFuelType() {
 			Console.Clear();
 			Console.WriteLine("Which fueltype would you like on your car?");
 			Console.WriteLine("1. Petrol");
@@ -154,20 +181,21 @@ namespace Project_Dahl_Programmering_2 {
 				InputFuelInfo = Console.ReadLine();
 			}
 			if (numChoice == 1) {
-                InputFuelInfo = "Petrol";
+                InputFuelInfo = " Petrol ";
                 MainPageTransmission();
             } else if (numChoice == 2) {
-                InputFuelInfo = "Diesel";
+                InputFuelInfo = " Diesel ";
                 MainPageTransmission();
             } else if (numChoice == 3) {
-                InputFuelInfo = "Electric";
+                InputFuelInfo = " Electric ";
                 MainPageTrailer();
             }
 
-
+			CarInfo carInfo = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
+			return carInfo;
 		}
 
-        public void MainPageTransmission() {
+        public CarInfo MainPageTransmission() {
             Console.Clear();
             Console.WriteLine("Which transmission would you like ?");
             Console.WriteLine("1. Manual");
@@ -179,16 +207,18 @@ namespace Project_Dahl_Programmering_2 {
 				InputTransmission = Console.ReadLine();
 			}
 			if  (numChoice == 1) {
-                InputTransmission = "Manual";
+                InputTransmission = " Manual";
                 MainPageTrailer();
             } else if (numChoice == 2) {
-                InputTransmission = "Automatic";
+                InputTransmission = " Automatic";
                 MainPageTrailer();
             }
 
-        }
+			CarInfo carInfo = new CarInfo(CarModel, HorsePower, TowCapacity, Doors, InputBodyType, InputFuelInfo, InputTransmission, VehicleType, Tyres);
+			return carInfo;
+		}
 
-        public void MainPageTrailer() {
+        public Trailer MainPageTrailer() {
             Console.Clear();
             Console.WriteLine("Would you like a trailer?");
             Console.WriteLine("1. Yes");
@@ -204,50 +234,55 @@ namespace Project_Dahl_Programmering_2 {
                 Console.WriteLine("Which trailer would you like?");
                 Console.WriteLine("1. Enclosed Trailer");
                 Console.WriteLine("2. Grating trailer");
-				string inputTrailerType = Console.ReadLine();
+				string InputTrailerType = Console.ReadLine();
 				int numChoiceTrailer;
-				while (!int.TryParse(inputTrailerType, out numChoiceTrailer)) {
+				while (!int.TryParse(InputTrailerType, out numChoiceTrailer)) {
 					Console.WriteLine("Please write a number");
-					inputTrailerType = Console.ReadLine();
-				}
+					InputTrailerType = Console.ReadLine();
+				} 
 
                if (numChoiceTrailer == 1) {
-                    inputTrailerType = "Enclosed Trailer";
+                    InputTrailerType = "Enclosed Trailer";
 					PossibleCars();
 
 			   } else if (numChoiceTrailer == 2) {
-                    inputTrailerType = "Grating Trailer";
+                    InputTrailerType = "Grating Trailer";
                     PossibleCars();
                }
-
-                
 
 
 			} else if (numChoice == 2) {
                 PossibleCars();
             }
 
-           
+            Trailer trailerChoice = new Trailer(InputTrailerType,MaxWeight,Volume,Braked, VehicleType, FuelInfo, Tyres);
+            return trailerChoice;
             
 		}
 
         public void PossibleCars() {
-            Console.WriteLine("Your chosen car");
+            Console.WriteLine("Your chosen car: ");
 
             List<CarInfo> PossibleCarChoices = CarInfo.MethodOfElimination(InputBodyType, InputTransmission, InputFuelInfo);
             for(int i = 0; i < PossibleCarChoices.Count; i++) {
-                Console.WriteLine(PossibleCarChoices[i].BodyType + PossibleCarChoices[i].Transmission + PossibleCarChoices[i].FuelInfo);
+                Console.WriteLine(PossibleCarChoices[i].CarModel);
             }
 
-			Console.WriteLine("Press any key to continue");
-			Console.ReadKey();
+            if (Car == PossibleCarChoices[0]) {
 
+            }
+                
+                
+
+            Console.ReadLine();
+            
 		}
 
         public void LastInfo() {
 			LastInfo lastInfo = new LastInfo();
-			lastInfo.Summary();
-            lastInfo.PriceBasedOnCar(InputBodyType, 1000, Start, End);
+			lastInfo.Summary(BookingInfo, PickUp, Car, TrailerInfo);
+            Console.WriteLine("The price will be: " + lastInfo.PriceBasedOnCar(InputBodyType, 1000, Start, End) + "kr");
+            
 		}
         
 

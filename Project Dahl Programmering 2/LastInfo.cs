@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 namespace Project_Dahl_Programmering_2 {
 	internal class LastInfo {
 
-		
-		PickUp PickUpSum;
-		CarInfo CarSum;
-		Trailer TrailerSum;
 
 		public double PriceBasedOnCar(string BodyType, double price, DateTime start, DateTime end) {
 			if (BodyType == "Sedan" || BodyType == "Suv" || BodyType == "Kombi") {
@@ -28,38 +24,38 @@ namespace Project_Dahl_Programmering_2 {
 			
 		}
 
-		public void Summary(Booking bookingInfo) {
+		public void Summary(Booking BookingInfo, PickUp PickUpInfo,CarInfo carInfo, Trailer trailerChoice) {
 			
 			Console.WriteLine("A summary of your booking details");
-			Console.WriteLine("Your Name: " + bookingInfo.Name);
-			Console.WriteLine("age: " + bookingInfo.Age);
-            Console.WriteLine("Email: " + bookingInfo.Email);
-            Console.WriteLine("Phone Number: " + bookingInfo.PhoneNumber);
-            Console.WriteLine("Adress: " + bookingInfo.Adress);
+			Console.WriteLine("Your Name: " + BookingInfo.Name);
+			Console.WriteLine("age: " + BookingInfo.Age);
+            Console.WriteLine("Email: " + BookingInfo.Email);
+            Console.WriteLine("Phone Number: " + BookingInfo.PhoneNumber);
+            Console.WriteLine("Adress: " + BookingInfo.Adress);
 
             Console.WriteLine("A summary of your pick up information");
-            Console.WriteLine("Booking duration: " + PickUpSum.Start + " to " + PickUpSum.End);
-            Console.WriteLine("Pick up location: " + PickUpSum.PickUpLocation);
+            Console.WriteLine("Booking duration: " + PickUpInfo.Start + " to " + PickUpInfo.End);
+            Console.WriteLine("Pick up location: " + PickUpInfo.PickUpLocation);
 
             Console.WriteLine("A summary of the car booking");
-            Console.WriteLine("Vehicle type: " + CarSum.VehicleType);
-            Console.WriteLine("Car model: " + CarSum.CarModel);
-            Console.WriteLine("Car body type: " + CarSum.BodyType);
-            Console.WriteLine("Fuel info: " + CarSum.FuelInfo);
-            Console.WriteLine("Tranmission: " + CarSum.Transmission);
-			Console.WriteLine("Horse Power:	" + CarSum.HorsePower);
-            Console.WriteLine("Tow Capacity: " + CarSum.TowCapacity);
-            Console.WriteLine("Doors: " + CarSum.Doors);
-            Console.WriteLine("Tyres: " + CarSum.Tyres);
+            Console.WriteLine("Vehicle type: " + carInfo.VehicleType);
+            Console.WriteLine("Car model: " + carInfo.CarModel);
+            Console.WriteLine("Car body type: " + carInfo.BodyType);
+            Console.WriteLine("Fuel info: " + carInfo.FuelInfo);
+            Console.WriteLine("Tranmission: " + carInfo.Transmission);
+			Console.WriteLine("Horse Power:	" + carInfo.HorsePower);
+            Console.WriteLine("Tow Capacity: " + carInfo.TowCapacity);
+            Console.WriteLine("Doors: " + carInfo.Doors);
+            Console.WriteLine("Tyres: " + carInfo.Tyres);
 
             Console.WriteLine("A summary of chosen Trailer (if chosen)");
-            Console.WriteLine("Vehicle type: " + TrailerSum.VehicleType);
-            Console.WriteLine("Tyres: " + TrailerSum.Tyres);
-            Console.WriteLine("Trailer type: " + TrailerSum.TrailerType);
-            Console.WriteLine("Max weight: " + TrailerSum.MaxWeight);
-            Console.WriteLine("Volume: " + TrailerSum.Volume);
-            Console.WriteLine("Braked info: " + TrailerSum.Braked);
-            Console.WriteLine("Fuel info: " + TrailerSum.FuelInfo);
+            Console.WriteLine("Vehicle type: " + trailerChoice.VehicleType);
+            Console.WriteLine("Tyres: " + trailerChoice.Tyres);
+            Console.WriteLine("Trailer type: " + trailerChoice.TrailerType);
+            Console.WriteLine("Max weight: " + trailerChoice.MaxWeight);
+            Console.WriteLine("Volume: " + trailerChoice.Volume);
+            Console.WriteLine("Braked info: " + trailerChoice.Braked);
+            Console.WriteLine("Fuel info: " + trailerChoice.FuelInfo);
 
             
 
