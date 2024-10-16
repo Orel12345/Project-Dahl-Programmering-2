@@ -31,10 +31,10 @@ namespace Project_Dahl_Programmering_2 {
 
 		protected DateTime Start;
         protected DateTime End;
-        CarInfo Car;
-        Trailer TrailerInfo;
-        Booking BookingInfo;
-        PickUp PickUp;
+        protected CarInfo Car;
+        protected Trailer TrailerInfo;
+        protected Booking BookingInfo;
+        protected PickUp PickUp;
 
 
         /// <summary>
